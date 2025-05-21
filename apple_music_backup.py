@@ -11,7 +11,7 @@ from pathlib import Path
 APPLE_MUSIC_LIBRARY_PATH = os.path.expanduser("~/Music/Apple Music Main/Music Library iTunes Main.musiclibrary")
 # ONEDRIVE_BACKUP_DIR = os.path.expanduser("~/OneDrive/Music/Apple Music library backup")
 ONEDRIVE_BACKUP_DIR = os.path.expanduser("~/Music/Backups")
-MAX_BACKUPS = 25
+MAX_BACKUPS = 20
 
 def is_apple_music_running():
     """Check if Apple Music is running using ps command"""
@@ -31,17 +31,17 @@ def create_backup():
     backup_filename = f"Music_Library_{timestamp}.musiclibrary"
     backup_path = os.path.join(ONEDRIVE_BACKUP_DIR, backup_filename)
 
-    # Copy the library file
+    # Copy the library directory
     try:
-        # Use copy2 to preserve metadata
-        shutil.copy2(APPLE_MUSIC_LIBRARY_PATH, backup_path)
+        # Use copytree since .musiclibrary is a directory bundle
+        shutil.copytree(APPLE_MUSIC_LIBRARY_PATH, backup_path)
         print(f"Backup created successfully: {backup_filename}")
 
         # Clean up old backups if needed
         cleanup_old_backups()
 
     except FileNotFoundError:
-        print(f"Error: Could not find the Apple Music library file at {APPLE_MUSIC_LIBRARY_PATH}")
+        print(f"Error: Could not find the Apple Music library at {APPLE_MUSIC_LIBRARY_PATH}")
     except PermissionError:
         print("Error: Permission denied. Make sure you have the necessary permissions to access the files.")
     except Exception as e:
