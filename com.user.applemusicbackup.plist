@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- Unique identifier for this launch agent -->
+    <key>Label</key>
+    <string>com.user.applemusicbackup</string>
+
+    <!-- The command and arguments to run -->
+    <key>ProgramArguments</key>
+    <array>
+        <!-- TEST IF BELOW ROOT FOLDER PATH WORKS -->
+        <string>/usr/bin/python3</string>
+        <!-- Path to Python interpreter -->
+        <!-- <string>/Library/Developer/CommandLineTools/usr/bin/python3</string> -->
+        <!-- Path to our backup script -->
+        <string>/Users/Alex/Documents/Coding/Applications/apple_music_library_copy/apple_music_backup.py</string>
+    </array>
+
+    <!-- Start the job when launchd loads it -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Keep the job running continuously -->
+    <key>KeepAlive</key>
+    <true/>
+
+    <!-- Where to write error messages -->
+    <key>StandardErrorPath</key>
+    <string>/Users/Alex/Library/Logs/applemusicbackup.err</string>
+
+    <!-- Where to write standard output -->
+    <key>StandardOutPath</key>
+    <string>/Users/Alex/Library/Logs/applemusicbackup.out</string>
+
+    <!-- Set the working directory for the script -->
+    <key>WorkingDirectory</key>
+    <string>/Users/Alex/Documents/Coding/Applications/apple_music_library_copy</string>
+</dict>
+</plist>
